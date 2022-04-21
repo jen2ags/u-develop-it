@@ -11,3 +11,8 @@ VALUES
 ('Octavia', 'Butler', 1),
 ('Unica', 'Zurn', 1);
 
+INSERT INTO parties (name, description)
+VALUES
+('JS Juggernauts', 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj'),
+('Heroes of HTML', 'pppppppppppppppppppppppppppppppppppp'),
+('Git Gurus', 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww');
