@@ -1,5 +1,6 @@
 const express = require('express');
 const res = require('express/lib/response');
+const { resolveRunner } = require('jest-resolve');
 
 const PORT = process.env.PORT || 3001;
 
@@ -165,6 +166,34 @@ app.post('/api/candidate', ({ body }, res) => {
             data: body
         });
 
+    });
+});
+
+//updating a candidate's party
+app.put('/api/candidate/:id', (req, res) => {
+    const sql = `UPDATE candidates SET party_id = ?
+                WHERE id = ?`;
+    const params = [req.body.party_id, req.params.id];
+    const errors = inputCheck(req.body, 'party_id');
+    if (errors) {
+        res.status(400).json({ error: errors });
+        resolveRunner;
+    }
+    db.query(sql,params, (err, result) => {
+        if(err) {
+            res.status(400).json({ error: err.message });
+            //check if a record was found
+        } else if (!result.affectedRows) {
+            res.json({
+                message: 'Candidate not found'
+            });
+        } else {
+            res.json({
+                message: 'success',
+                data: req.body,
+                changes: result.affectedRows
+            });
+        }
     });
 });
 
